@@ -17,9 +17,9 @@ const rules = [{
 	use: [ 'babel-loader' ]
 },
 {
-  test: /\.scss$|\.css$/,
+  test: /\.scss/,
   loader: ExtractTextPlugin.extract({
-    use: 'css-loader!postcss-loader!sass-loader',
+    use: ['css-loader', 'postcss-loader', 'sass-loader'],
     fallback: 'style-loader'
   }),
 }]
@@ -27,7 +27,7 @@ const rules = [{
 module.exports = {
 	entry: [
 		'react-hot-loader/patch',
-		// PATHS.css,
+		PATHS.css,
 		PATHS.js,
 	],
 	output: {
@@ -37,10 +37,10 @@ module.exports = {
 	module: { rules },
 	plugins: [
 	new DotEnvPlugin({
-		sample: './.env.example',
+		sample: './.env.example',	
 		path: PATHS.env
 	}),
-	new ExtractTextPlugin('style-[hash].css'),
+	new ExtractTextPlugin('stylesheets/main.css'),
 	new HtmlWebpackPlugin({ template: 'index.html' }),
 	new webpack.HotModuleReplacementPlugin(),
 	new webpack.NamedModulesPlugin(),
