@@ -45,7 +45,7 @@ reducers[types.ADD_AUTHOR] = (state = initState, action) => {
 
 reducers[types.DELETE_AUTHOR] = (state = initState, action) => {
   const authors = state.list
-  const newAuthorsArray = authors.filter(author => author.id !== action.payload.data.id)
+  const newAuthorsArray = authors.filter(author => author.name !== action.payload.data.name)
 
   return Object.assign({}, state, { list: newAuthorsArray })
 }

@@ -8,7 +8,7 @@ const deleteAuthor = ({ dispatch, getState, action }) => {
   const books = getState().app.books.list
   
   books.map(book => {
-    if (book.author.id === author.id) dispatch(bookActions.deleteBook(book.id))
+    if (book.author.name === author.name) dispatch(bookActions.deleteBook(book.id))
   })
 }
 
