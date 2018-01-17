@@ -9,9 +9,9 @@ const addBook = ({ dispatch, getState, action }) => {
   
   authors.map(author => author.name.toUpperCase())
 
-  if (authors.indexOf(book.author.toUpperCase()) !== -1) {
+  if (authors.indexOf(book.author.toUpperCase()) === -1) {
     dispatch(authorActions.addAuthor({ 
-      name: book.author.name
+      name: book.author
     }))
   }
 }

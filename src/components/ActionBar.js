@@ -20,7 +20,7 @@ class ActionBar extends Component {
       })
     } else {
       items.map(item => {
-        this.props.actions.deleteAuthor(item.id)
+        this.props.actions.deleteAuthor(item)
       })
     }
   }
