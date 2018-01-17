@@ -7,9 +7,9 @@ const addBook = ({ dispatch, getState, action }) => {
   const book = action.payload.data
   const authors = getState().app.authors.list
   
-  authors.map(author => author.name.toUpperCase())
-
-  if (authors.indexOf(book.author.toUpperCase()) === -1) {
+  const authorsToUpper = authors.map(author => author.name.toUpperCase())
+  console.log(authorsToUpper)
+  if (authorsToUpper.indexOf(book.author.toUpperCase()) === -1) {
     dispatch(authorActions.addAuthor({ 
       name: book.author
     }))
