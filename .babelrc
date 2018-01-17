@@ -1,3 +1,10 @@
 {
-  "presets": ["es2015", "react"]
+  "plugins": [
+    // support rest/spread properties for objects
+    "transform-object-rest-spread"
+  ],
+  "presets": [
+    ["es2015", { "modules": false }],
+    "react"
+  ]
 }

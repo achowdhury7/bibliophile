@@ -1,7 +1,14 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { rootReducer } from './reducers'
+import thunk from 'redux-thunk'
+import bookMiddleware from './middlewares/books'
+import authorMiddleware from './middlewares/authors'
 
-const middleware = []
+const middleware = [
+  authorMiddleware,
+  bookMiddleware,
+  thunk
+]
 
 const configureStore = (initialState = {}) => {
   const store = compose(

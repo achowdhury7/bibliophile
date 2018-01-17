@@ -10,11 +10,6 @@ const Header = (props) => {
           <div className="title">
             <h1>Bibiliophile</h1>
           </div>
-        </Col>
-        <Col md={8}>
-          <div className='search-container'>
-            <Search /> 
-          </div>
         </Col>   
       </Row>
     </Grid>

@@ -3,26 +3,59 @@ import types from '../constants/ActionTypes'
 
 const reducers = {}
 const initState = {
-  data: [],
+  list: [],
   isFetching: false,
   isLoaded: false,
   error: false, 
-  isSelected: false
+  selected: []
 }
 
-reducers[types.SET_BOOK_FETCHING] = (state = initState) =>
+reducers[types.SET_BOOKS_FETCHING] = (state = initState) =>
   Object.assign({}, state, { isFetching: true })
 
-reducers[types.SET_BOOK_LOADED] = (state = initState) =>
+reducers[types.SET_BOOKS_LOADED] = (state = initState) =>
   Object.assign({}, state, { isFetching: false, isLoaded: true })
 
-reducers[types.SET_BOOK_SELECTED] = (state = initState, action) =>
-  Object.assign({}, state, { isSelected: action.payload.isSelected })
+reducers[types.SET_BOOK_SELECTED] = (state = initState, action) => {
+  const selectedBooks = state.selected
 
-reducers[types.SET_BOOK] = (state = initState, action) =>
-  Object.assign({}, state, { data: action.payload.data })
+  selectedBooks.push(action.payload.data)
+  return Object.assign({}, state, { selected: selectedBooks })
+} 
+ 
+reducers[types.SET_BOOK_DESELECTED] = (state = initState, action) => {
+  const selectedBooks = state.selected
 
-reducers[types.SET_BOOK_ERROR] = (state = initState) =>
+  const newSelectedArray = selectedBooks.filter(book => book.id !== action.payload.data.id)
+  return Object.assign({}, state, { selected: newSelectedArray })
+}
+
+reducers[types.SET_BOOKS] = (state = initState, action) =>
+  Object.assign({}, state, { list: action.payload.data, isFetching: false, isLoaded: true })
+
+reducers[types.SET_BOOKS_ERROR] = (state = initState) =>
   Object.assign({}, state, { isFetching: false, isLoaded: false, error: true })
+
+reducers[types.ADD_BOOK] = (state = initState, action) => {
+  const books = state.list
+  const newBook = {
+    id: Math.floor(Math.random() * 100),
+    title: action.payload.data.title,
+    desc: action.payload.data.desc,
+    author: {
+      name: action.payload.data.author
+    }
+  }
+  books.push(newBook)
+
+  return Object.assign({}, state, { list: books })
+}
+
+reducers[types.DELETE_BOOK] = (state = initState, action) => {
+  const books = state.list
+  const newBooksArray = books.filter(book => book.id !== action.payload.id)
+
+  return Object.assign({}, state, { list: newBooksArray })
+}
 
 export default handleActions(reducers, initState)
